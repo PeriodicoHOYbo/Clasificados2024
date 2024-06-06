@@ -13,8 +13,8 @@ export default function Navbar() {
         setUserShowImg(!showImg)
         setUserShowVideo(false)
     }
-    function handleClickYT() {
-        setUserShowVideo(!showVideo)
+    function handleClickYT(data) {
+        setUserShowVideo(data)
         setUserShowImg(false)
     }
     function handlerClick() {
@@ -57,10 +57,20 @@ export default function Navbar() {
                         </a>
                     </Link>
                     {
-                        sectionsDB.map((i, index)=> index !== 0 && <Link href={`#${i.hash}`} legacyBehavior scroll={false}>
-                            <a className={`uppercase ${style.link} ${pathname == `#${i.hash}` ? style.active : ''}`} onClick={handlerClick}>{i.title}</a>
+                        sectionsDB.map((i, index) => index !== 0 && <Link href={`#${i.hash}`} legacyBehavior scroll={false}>
+                            <a className={`uppercase ${style.link} ${pathname == `#${i.hash}` ? style.active : ''}`}  onClick={handlerClick}>{i.title}</a>
                         </Link>)
                     }
+                    <Link href="#Videos" legacyBehavior scroll={false}>
+                        <a className={`${style.link} ${pathname == "#Videos" ? style.active : ''}`} onClick={()=>handleClickYT('YouTube')}>VIDEOS</a>
+                    </Link>
+                    <Link href="#Nosotros" legacyBehavior scroll={false}>
+                        <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >NOSOTROS</a>
+                    </Link>
+                    <Link href="#EdicionDigital" legacyBehavior scroll={false}>
+                        <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`}  onClick={()=>handleClickYT('EdicionDigital')} >EDICION DIGITAL</a>
+                    </Link>
+                  
                     <Link href="/" legacyBehavior scroll={false}>
                         <a className={`uppercase absolute pt-[5px] top-0 bottom-0 my-auto  right-[0px] ${pathname == "#Resoluciones" ? style.active : ''}`} onClick={handlerClick}>
                             <span className='  h-[30px] rounded-full flex justify-center items-center bg-white rounded my-auto '><img src={'/clasificados_v2.jpeg'} className="block h-[30px] rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
@@ -80,7 +90,7 @@ export default function Navbar() {
 
 
 
-                    {/* 
+{/* 
 
 
                     <Link href="#Resoluciones" legacyBehavior scroll={false}>

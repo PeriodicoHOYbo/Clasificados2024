@@ -19,7 +19,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { listAll } from 'firebase/storage'
 import Temporizador from '../components/Temporizador'
-
+import EdicionDigital from '../components/EdicionDigital.jsx'
 const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playlistItems'
 const YOUTUBE_API_KEY = "AIzaSyBZkk7x_tGRbf-Yg_A7Y9QYcBQe7T9QtWU"
 
@@ -65,7 +65,7 @@ function Home() {
   }
 
 
-  
+
   // const setUserModalsInterval = (time) => {
   //   console.log('interval')
   //   timer.current = setTimeout(() => {
@@ -86,13 +86,13 @@ function Home() {
   }
 
 
-  console.log(userDB)
+  console.log(window.location.hash)
   return (
     <>
       <Layout>
         <div className={styles.main}>
           <Header></Header>
-
+         { showVideo === 'EdicionDigital' && <EdicionDigital></EdicionDigital>}
           {showImg &&
 
             <div className={styles.gridImages}>
@@ -110,7 +110,7 @@ function Home() {
               })}
             </div>}
 
-          {showVideo && listYT !== false &&
+          {showVideo  === 'YouTube' && listYT !== false &&
 
             <div className={styles.gridVideos}>
               {listYT.items.map(({ id, snippet = {} }) => {
@@ -132,6 +132,7 @@ function Home() {
                   </div>
                 )
               })}
+
               <div className={styles.boxVideo} onClick={redirectYT}>
                 <img className={styles.seeMoreYT}
                   src="/seeMoreYT.jpeg"
@@ -143,8 +144,7 @@ function Home() {
               </div>
 
             </div>}
-
-          {showImg == false && showVideo == false && sectionsDB.map((i, index) => <Section topic={i.title} publicView={true} color='' key={index}></Section>)}
+          {showImg == false && showVideo == false && sectionsDB.map((i, index) => <Section topic={i.hash} title={i.title} publicView={true} color='' key={index}></Section>)}
           {/* <Section topic={i.title} publicView={true} color=''></Section> */}
 
         </div>

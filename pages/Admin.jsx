@@ -103,19 +103,8 @@ function Admin() {
           <span className='block w-full h-[3px] absolute bottom-[-7px] left-0 bg-[brown]'></span>
         </div>
         <Header></Header>
-       { sectionsDB.map((i, index) => <Section topic={i.title} publicView={false} color='#8FC2C9' key={index}></Section>)}
+       { sectionsDB.map((i, index) => <Section topic={i.hash}  title={i.title}  publicView={false} color='#8FC2C9' key={index}></Section>)}
 
-        {/* <Section topic="Inicio" publicView={false} color='#8FC2C9'></Section>
-        <Section topic="Resoluciones" publicView={false} color='#c98f8f'></Section>
-        <Section topic="Comunicados" publicView={false} color='#8FC2C9'></Section>
-        <Section topic="Edictos" publicView={false} color='#c98f8f'></Section>
-        <Section topic="Remates" publicView={false} color='#8FC2C9'></Section>
-        <Section topic="Articulos" publicView={false} color='#c98f8f'></Section>
-        <Section topic="Citaciones" publicView={false} color='#8FC2C9'></Section>
-        <Section topic="Invitaciones" publicView={false} color='#c98f8f'></Section>
-        <Section topic="Inmobiliria" publicView={false} color='#8FC2C9'></Section>
-        <Section topic="Servicios profesionales" publicView={false} color='#c98f8f'></Section>
-        <Section topic="Empleos" publicView={false} color='#8FC2C9'></Section> */}
         {userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && <button className={styles.viewPeriodista} onClick={handlerViewPeriodista}>P</button>}
       </main>
 

@@ -82,7 +82,7 @@ let allData = {}
 
 
 async function getIndexData(setUserData, date, minDate, setUserSuccess) {
-  let arr = ['Inicio', ...sectionsDB.map(i => i.title)]
+  let arr = ['Inicio', ...sectionsDB.map(i => i.hash)]
   let arr2 = ['BannerIzquierdo1', 'BannerIzquierdo2', 'BannerIzquierdo3', 'BannerIzquierdo4', 'BannerPortada1', 'BannerPortada2', 'BannerPortada3', 'BannerDerecho1', 'BannerDerecho2', 'BannerDerecho3', 'BannerDerecho4', 'BannerPortada']
   let arr3 = ['BannerNotas1', 'BannerNotas2', 'BannerNotas3', 'BannerNotas4']
 

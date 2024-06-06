@@ -51,7 +51,7 @@ const bannerNotas = [
 ]
 
 
-export default function Section({ topic, publicView, color }) {
+export default function Section({ topic, title, publicView, color }) {
 
     const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, monthAndYear, dayMonthYear, viewPeriodista, item, setItem, modal, setModal } = useUser()
     const [tag, setTag] = useState('')
@@ -112,19 +112,19 @@ export default function Section({ topic, publicView, color }) {
         setCheck(i)
     }
     // console.log(userDB && userDB[topic] &&  userDB[topic] !== undefined && check !== undefined && userDB[topic][check.ruteDB])
-
+    console.log(title)
     return (
-        <div className='w-full bg-white pb-[5px] sm:pb-[10px]'>
+        <div className='w-full bg-white pb-[5px] sm:pb-[10px]' id={topic}>
             {modal === 'DELETE' && <Modal2 theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas seguro de eliminar la publicidad que selecionaste</Modal2>}
             {modal === 'EDIT' && dataEditor && <ModalForm>
                 {tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG={`/${topic}/Modals`} id='BM' title='Añadir Modal' dataDB={dataEditor} />}
                 {tag === 'Notas' && <FormAddsC ruteDB={`/${topic}/${check.ruteDB}`} ruteSTG={`/${topic}/${check.ruteDB}`} id={check.id} title={check.title} dataDB={dataEditor} />}
             </ModalForm>
             }
-            {/* <Modal topic={topic} carpeta={dataEditor.carpeta} i={dataEditor.i} close={handlerClickEnlace} ></Modal> */}
             {userDB[topic] !== null && publicView == false && <Form topic={topic} value={userDB[`${topic}-${date}`]} color={color}></Form>}
 
-            {user && userDB && userDB.users && userDB.users[user.uid] !== undefined && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && publicView == false && viewPeriodista == false &&
+            {
+                user && userDB && userDB.users && userDB.users[user.uid] !== undefined && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && publicView == false && viewPeriodista == false &&
                 <>
                     <div className={`grid ${topic !== 'Inicio' ? 'grid-cols-3' : 'grid-cols-3'} gap-2`}>
                         <Tag theme={tag === 'Banners' ? 'Primary' : 'Transparent'} click={() => handlerTag('Banners')}>Banners</Tag>
@@ -132,7 +132,6 @@ export default function Section({ topic, publicView, color }) {
                         {topic !== 'Inicio'
                             ? <Select arr={bannerNotas} click={handleCheck} focus={tag.includes('Notas') ? true : false}></Select>
                             : <Tag theme={tag === 'Banners' ? 'Primary' : 'Transparent'} click={() => router.push('/EdicionDigital')}>Edición digital</Tag>}
-                        {/* { topic !== 'Inicio' && <Tag theme={tag === 'Notas' ? 'Primary' : 'Transparent'} click={() => handlerTag('Notas')}>Notas</Tag>} */}
                     </div>
                     <div className={`${style.formInputsAdmin} ${style.formInputs}`}>
                         {tag === 'Banners' && <>
@@ -159,9 +158,7 @@ export default function Section({ topic, publicView, color }) {
                     return <div className='inline-block relative' key={index}>
                         <img src={i.url} className={`${'w-full gap-5 rounded-[15px] mb-3.5'} transition-all`} style={{ zIndex: '1000000000' }} alt="" />
                         <div className='w-full absolute bottom-[20px] px-5 z-50'>
-
                             <Button theme='MiniDanger' click={() => router.pathname == "/Admin" && handlerClickEnlace(i)}>config</Button>
-                            {/* <Button theme='MiniDanger' click={() => delet(i, 'Notas')}>config</Button> */}
                         </div>
                     </div>
                 })}
@@ -170,6 +167,7 @@ export default function Section({ topic, publicView, color }) {
             {userDB && userDB[topic] && userDB[topic]['Templates'] && (tag === 'Banners' || tag === '') &&
                 <Template
                     topic={topic}
+                    title={title}
                     color={color}
                     grid={userDB[topic]['Templates'][userDB[topic]['Templates'][dayMonthYear] ? dayMonthYear : getDayMonthYear()]} />
             }
