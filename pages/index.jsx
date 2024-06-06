@@ -62,8 +62,10 @@ function Home() {
     // zoomIMG.lateral !== true ? console.log('nolaterla') : console.log('lateral')
     zoomIMG.lateral !== true && userDB && userDB['Inicio'] && userDB['Inicio']['Modals'] && Object.values(userDB['Inicio']['Modals']).length > 0 && setUserModalsInterval(5000)
     // zoomIMG.lateral !== true && userDB && userDB['Inicio'] && userDB['Inicio']['Modals'] && Object.values(userDB['Inicio']['Modals']).length > 0 && setUserModalsInterval(userDB, zoomIMG, setZoomIMG, setBgOpacity, 5000)
-
   }
+
+
+  
   // const setUserModalsInterval = (time) => {
   //   console.log('interval')
   //   timer.current = setTimeout(() => {
