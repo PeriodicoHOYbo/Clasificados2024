@@ -20,9 +20,13 @@ import { handleSignOut, writeUserData } from '../firebase/utils'
 import { uploadIMG } from '../firebase/storage'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import EdicionDigital from '../components/EdicionDigital.jsx'
+const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playlistItems'
+const YOUTUBE_API_KEY = "AIzaSyBZkk7x_tGRbf-Yg_A7Y9QYcBQe7T9QtWU"
 
+var fetch_url = `${YOUTUBE_PLAYLIST_ITEMS_API}`
 function Admin() {
-  const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, setUserDate, viewPeriodista, setUserViewPeriodista } = useUser()
+  const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date,  showImg, showVideo, setUserDate, viewPeriodista, setUserViewPeriodista } = useUser()
   const router = useRouter()
 
 
@@ -37,6 +41,25 @@ function Admin() {
   const [dataForDate, setDataForDate] = useState([])
   const [dataEditor, setDataEditor] = useState(null)
 
+  const [listYT, setListYT] = useState(false);
+
+
+  // const [zoomIMG, setZoomIMG] = useState(undefined)
+  const [modalsInterval, setModalsInterval] = useState(false)
+
+  async function getYB() {
+    const res = await fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=8&playlistId=UULFXFA6pzESb1NQMsepmhC6Vw&key=${YOUTUBE_API_KEY}`)
+    const data = await res.json();
+    setListYT(data)
+  }
+
+  function redirectYT() {
+    window.open('https://www.youtube.com/@periodicohoybolivia2201/videos', '_blank')
+  }
+
+  useEffect(() => {
+    getYB()
+  }, [])
   function setPostsElements() {
     setElements(!elements)
   }
@@ -103,7 +126,74 @@ function Admin() {
           <span className='block w-full h-[3px] absolute bottom-[-7px] left-0 bg-[brown]'></span>
         </div>
         <Header></Header>
-       { sectionsDB.map((i, index) => <Section topic={i.hash}  title={i.title}  publicView={false} color='#8FC2C9' key={index}></Section>)}
+
+
+
+
+
+        { showVideo === 'EdicionDigital' && <EdicionDigital></EdicionDigital>}
+          {showImg &&
+
+            <div className={styles.gridImages}>
+
+              {userDB && userDB.Inicio && Object.keys(userDB.Inicio.Posts).map((i, index) => {
+
+                return <div className={styles.image} key={index}>
+                  <Link href='#' legacyBehavior>
+                    <a target='_blank'>
+                      <img className={styles.image} src={userDB.Inicio.Posts[i].url} alt="img" />
+                      <span className={styles.description}>{userDB.Inicio.Posts[i].description}</span>
+                    </a>
+                  </Link >
+                </div>
+              })}
+            </div>}
+
+          {showVideo  === 'YouTube' && listYT !== false &&
+
+            <div className={styles.gridVideos}>
+              {listYT.items.map(({ id, snippet = {} }) => {
+                const { title, thumbnails = {}, resourceId = {} } = snippet;
+                const { medium } = thumbnails;
+                return (
+                  <div key={id} className={styles.boxVideo}>
+                    <iframe
+                      className={styles.video}
+                      // width={medium.width}
+                      // height={medium.heigth}
+                      src={`https://www.youtube.com/embed/${resourceId.videoId}`}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+
+                    {/* <p className={styles.videoDescription}>{title}</p> */}
+                  </div>
+                )
+              })}
+
+              <div className={styles.boxVideo} onClick={redirectYT}>
+                <img className={styles.seeMoreYT}
+                  src="/seeMoreYT.jpeg"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen />
+                {/* <p className={styles.videoDescription}>Las noticias mas relevantes en <br /> HOY.BO</p> */}
+              </div>
+            </div>}
+
+
+
+
+
+
+
+
+
+
+        
+       { showImg == false && showVideo == false && sectionsDB.map((i, index) => <Section topic={i.hash}  title={i.title}  publicView={false} color='#8FC2C9' key={index}></Section>)}
 
         {userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && <button className={styles.viewPeriodista} onClick={handlerViewPeriodista}>P</button>}
       </main>

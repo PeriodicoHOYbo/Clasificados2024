@@ -92,6 +92,11 @@ function Home() {
       <Layout>
         <div className={styles.main}>
           <Header></Header>
+
+
+
+
+          
          { showVideo === 'EdicionDigital' && <EdicionDigital></EdicionDigital>}
           {showImg &&
 
@@ -142,8 +147,14 @@ function Home() {
                   allowfullscreen />
                 {/* <p className={styles.videoDescription}>Las noticias mas relevantes en <br /> HOY.BO</p> */}
               </div>
-
             </div>}
+
+
+
+
+
+
+
           {showImg == false && showVideo == false && sectionsDB.map((i, index) => <Section topic={i.hash} title={i.title} publicView={true} color='' key={index}></Section>)}
           {/* <Section topic={i.title} publicView={true} color=''></Section> */}
 
