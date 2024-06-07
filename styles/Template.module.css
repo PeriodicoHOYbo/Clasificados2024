@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 68vw;
     margin-bottom: 0px;
 }
 
@@ -382,6 +382,15 @@ background-color: red;
 
 
 @media (max-width: 850px) {
+    .section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+        margin-bottom: 0px;
+    }
+    
     .description {
         font-size: 12px;
     }

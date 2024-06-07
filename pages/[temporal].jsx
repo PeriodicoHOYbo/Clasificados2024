@@ -271,8 +271,6 @@ function TemplateOne() {
 
       {
         formViewer === true && <div className={`relative h-screen bg-black ${styles.viewer}`}>
-          {/* <h2 className={`p-5 sm:w-[50vw] absolute left-0 right-0 mx-auto ${styles.title} text-center bg-white rounded-[20px] shadow-2xl z-50`}>{description}</h2> */}
-
           {
             description && description !== undefined &&
             <h2
@@ -283,7 +281,7 @@ function TemplateOne() {
           }
 
           {
-                 specificData && router.query && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota !== '' && specificData[`PostImage_${router.query.temporal}`].nota && specificData[`PostImage_${router.query.temporal}`].nota !== undefined && specificData[`PostImage_${router.query.temporal}`].nota !== 'en redaccion' && <div className={`${removeKEY2 === false && styles.containerButtonsPlayer} fixed w-full transition-all right-0 flex sm:w-[50vw] justify-center sm:justify-start  z-50`}>
+            specificData && router.query && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota !== '' && specificData[`PostImage_${router.query.temporal}`].nota && specificData[`PostImage_${router.query.temporal}`].nota !== undefined && specificData[`PostImage_${router.query.temporal}`].nota !== 'en redaccion' && <div className={`${removeKEY2 === false && styles.containerButtonsPlayer} fixed w-full transition-all right-0 flex sm:w-[50vw] justify-center sm:justify-start  z-50`}>
               <div className='relative inline  '>
                 <span className='absolute top-0 bottom-0 my-auto font-bold left-2 text-[20px] z-50 text-white' onClick={() => setRemoveKEY2(!removeKEY2)}> {removeKEY2 === true ? '>>' : '<<'} </span>
                 {
@@ -298,16 +296,23 @@ function TemplateOne() {
           {
             userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images !== undefined &&
             <div className='relative '>
-              <Slide transitionDuration={50} duration={50} scale={1} indicators={true} easing='cubic' autoplay={false}>
+              <Slide transitionDuration={50} arrows={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.length > 1} duration={50} scale={1} indicators={true} easing='cubic' autoplay={false}>
                 {
                   userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.map((i, index) =>
                     <div className="each-slide " key={index} >
                       <img className='block relative w-screen    h-screen object-contain cursor-zoom-in' src={i.url} onClick={() => redirect(i.url, true)} />
                       {
                         userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
-                          <a  className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-2 border-white border-[1px]' target="_blank"> Contactar <img className='ml-5 h-[30px] w-[30px]' src={`/SocialMedia/whatsapp.svg`} /></a>
+                          <a className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-2 border-white border-[1px]' target="_blank"> Contactar <img className='ml-5 h-[30px] w-[30px]' src={`/SocialMedia/whatsapp.svg`} /></a>
                         </Link>
                       }
+                      {
+                        <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
+                          <a className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-2 border-white border-[1px]' target="_blank"> Contactar <img className='ml-5 h-[30px] w-[30px]' src={`/SocialMedia/whatsapp.svg`} /></a>
+                        </Link>
+                      }
+
+                      {console.log(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp)}
                     </div>
                   )}
               </Slide>
@@ -349,12 +354,12 @@ function TemplateOne() {
 
       {/* editor */}
 
-      {user && formViewer === false && <div className={`p-5 min-h-screen bg-slate-100 ${styles.viewer}`}>
+      {user && formViewer === false && <div className={`p-5 min-h-screen bg-black ${styles.viewer}`}>
         <div className='flex w-full'>
           <label htmlFor="Title" className='w-[100px]' >Titulo</label>
           <input type="text" id="Title" name="description" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={description} />
         </div>
-        <br />
+        <br />    <br />    <br />
         {/* <div className='flex w-full'>
               <label htmlFor="Description" className='w-[100px]' >Descripcion</label>
               <input type="text" id="Description" name="title" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={title} />
@@ -362,7 +367,7 @@ function TemplateOne() {
 
         <h2 className={styles.title}>{description}</h2>
         <p className={styles.description}>{title}</p>
-
+        {/* 
 
         <SpeechToText setValue={setTextEditor} value={textEditor ? textEditor : 'nada'} />
         <br />
@@ -374,15 +379,15 @@ function TemplateOne() {
 
         <input type="checkbox" onClick={handlerChecked} checked={isChecked} /> init
         <br />
-        <br />
+        <br /> */}
 
 
         <div className={styles.buttonsContainer}>
-          <Button style="miniButtonPrimary" click={(e) => save(e, 'B')}> Guardar/Borrador</Button>
+          {/* <Button style="miniButtonPrimary" click={(e) => save(e, 'B')}> Guardar/Borrador</Button> */}
           <Button style="miniButtonPrimary" click={(e) => save(e, 'P')}> Publicar</Button>
         </div>
         {user && formViewer == false && <div className='w-[90%] max-w-[350px] relative left-0 right-0  mx-auto py-5'>
-          <Button style="miniButtonPrimary" click={formViewerHandler}>Previsualizar</Button>
+          {/* <Button style="miniButtonPrimary" click={formViewerHandler}>Previsualizar</Button> */}
         </div>}
       </div>}
 
