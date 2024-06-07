@@ -7,7 +7,7 @@ import Button from '../components/Button'
 import Success from '../components/Success'
 import Error from '../components/Error'
 import Layout from '../layout/Layout'
-
+import Link from 'next/link'
 import BannerLeft from '../components/BannerLeft'
 import BannerRight from '../components/BannerRight'
 import Modal from '../components/Modal'
