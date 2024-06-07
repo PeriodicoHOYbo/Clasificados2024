@@ -57,10 +57,12 @@ export default function Error({ key, rute, carpeta, item, i, post, topic, close 
         const monthYear = monthAndYear ? monthAndYear : getMonthAndYear()
         const newDate = new Date().getTime()
         if (key == "SavePost") {
-            const ruteDB = `/${topic}/Posts` // Nov-2022/Inicio
             const ruteSTG = `${topic}` // Nov-2022/
             const fileName = `PostImage_${i}` // PostImage_Tue Nov 15 2022 
-            const object = { [fileName]: { ...userDB[topic].Posts[`PostImage_${i}`], fecha: newDate, description: data.descriptionPost ? data.descriptionPost : userDB[topic].Posts[`PostImage_${i}`].description, enlace: data.enlacePost ? data.enlacePost : userDB[topic].Posts[`PostImage_${i}`].enlace, objectFit: data.objectPositionPost ? data.objectPositionPost : userDB[topic].Posts[`PostImage_${i}`].objectFit, ...data } }
+            const ruteDB = `/${topic}/Posts/${fileName}` // Nov-2022/Inicio
+
+            // const object = { [fileName]: { ...userDB[topic].Posts[`PostImage_${i}`], fecha: newDate, description: data.descriptionPost ? data.descriptionPost : userDB[topic].Posts[`PostImage_${i}`].description, enlace: data.enlacePost ? data.enlacePost : userDB[topic].Posts[`PostImage_${i}`].enlace, objectFit: data.objectPositionPost ? data.objectPositionPost : userDB[topic].Posts[`PostImage_${i}`].objectFit, ...data } }
+            const object = { ...data }
             writeUserData(ruteDB, object, setUserSuccess, setUserData)
             postImage && uploadIMG(ruteDB, ruteSTG, fileName, postImage, setUserSuccess, monthYear, isCheckedComp)
         }
@@ -93,7 +95,7 @@ export default function Error({ key, rute, carpeta, item, i, post, topic, close 
                 {carpeta == 'Post' &&
                     <form className={style.formSelectPost}>
                         <label className='bg-[brown] text-white w-full rounded-full p-1 text-[12px] mb-5' >Editar</label>
-                        <input type="text" placeholder='Descripción' name="descriptionPost" defaultValue={userDB[topic]["Posts"][`PostImage_${i}`].description} onChange={handlerEventChange} maxLength={isCheckedLength ? 65 : ''} />
+                        <input type="text" placeholder='Descripción' name="description" defaultValue={userDB[topic]["Posts"][`PostImage_${i}`].description} onChange={handlerEventChange} maxLength={isCheckedLength ? 65 : ''} />
                         <input type="text" placeholder='Enlace' name="enlacePost" defaultValue={userDB[topic]["Posts"][`PostImage_${i}`].enlace} onChange={handlerEventChange} />
                         <input type="text" className='w-full border-b-[1px] border-gray-500' placeholder='WhatsApp'  defaultValue={userDB[topic]["Posts"][`PostImage_${i}`].whatsapp} name="whatsapp" onChange={handlerEventChange} />
                         <input type="text" className='w-full border-b-[1px] border-gray-500' placeholder='URL de redireccion' defaultValue={userDB[topic]["Posts"][`PostImage_${i}`].redireccion}  name="redireccion" onChange={handlerEventChange} />

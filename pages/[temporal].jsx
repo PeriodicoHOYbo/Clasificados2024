@@ -300,22 +300,17 @@ function TemplateOne() {
                 {
                   userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.map((i, index) =>
                     <div className="each-slide " key={index} >
-                      <img className='block relative w-screen    h-screen object-contain cursor-zoom-in' src={i.url} onClick={() => redirect(i.url, true)} />
-                      {
-                        userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
-                          <a className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-2 border-white border-[1px]' target="_blank"> Contactar <img className='ml-5 h-[30px] w-[30px]' src={`/SocialMedia/whatsapp.svg`} /></a>
-                        </Link>
-                      }
-                      {
-                        <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
-                          <a className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-2 border-white border-[1px]' target="_blank"> Contactar <img className='ml-5 h-[30px] w-[30px]' src={`/SocialMedia/whatsapp.svg`} /></a>
-                        </Link>
-                      }
-
-                      {console.log(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp)}
+                      <div>
+                        <img className='block relative w-screen    h-screen object-contain cursor-zoom-in' src={i.url} onClick={() => redirect(i.url, true)} />
+                      </div>
                     </div>
                   )}
               </Slide>
+              {
+                userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} className='z-50' legacyBehavior>
+                  <a className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-1 border-white border-[1px] rounded-full' target="_blank"> Contactar <img className='ml-5 h-[20px] w-[20px] pb-1' src={`/SocialMedia/whatsapp.svg`} /></a>
+                </Link>
+              }
             </div>
           }
 
@@ -385,10 +380,11 @@ function TemplateOne() {
         <div className={styles.buttonsContainer}>
           {/* <Button style="miniButtonPrimary" click={(e) => save(e, 'B')}> Guardar/Borrador</Button> */}
           <Button style="miniButtonPrimary" click={(e) => save(e, 'P')}> Publicar</Button>
+
+          {user && formViewer == false &&
+            <Button style="miniButtonPrimary" click={formViewerHandler}>Visualizar</Button>
+          }
         </div>
-        {user && formViewer == false && <div className='w-[90%] max-w-[350px] relative left-0 right-0  mx-auto py-5'>
-          {/* <Button style="miniButtonPrimary" click={formViewerHandler}>Previsualizar</Button> */}
-        </div>}
       </div>}
 
 
