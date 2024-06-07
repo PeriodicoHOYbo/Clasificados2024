@@ -34,6 +34,10 @@ export default function Banner({ carpeta, items, click }) {
     }
     function handlerZoom(i) {
         console.log(i)
+        if (i.pdf && i.pdf !== undefined && i.pdf === true) {
+            window.open(i.redireccion, '_blank')
+            return
+        }
         if (i.modal) {
             console.log('active true')
 
@@ -104,7 +108,7 @@ export default function Banner({ carpeta, items, click }) {
                             }
 
                             {
-                                userDB[`${carpeta}${item}`][i].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[`${carpeta}${item}`][i].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
+                                userDB[`${carpeta}${item}`][i].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[`${carpeta}${item}`][i].whatsapp}&text=Hola%20vi%20su%20anuncio%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
                                     <a target="_blank"><img className={styles.sliderWhatsapp} src={`/SocialMedia/whatsapp.svg`} /></a>
                                 </Link>
                             }
@@ -140,7 +144,7 @@ export default function Banner({ carpeta, items, click }) {
                                     }
                                     {
                                         userDB[`${carpeta}${item}`][i].whatsapp !== '' &&
-                                        <Link href={`https://api.whatsapp.com/send?phone=${userDB[`${carpeta}${item}`][i].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
+                                        <Link href={`https://api.whatsapp.com/send?phone=${userDB[`${carpeta}${item}`][i].whatsapp}&text=Hola%20vi%20su%20anuncio%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
                                             <a target="_blank"><img className={styles.sliderWhatsapp} src={`/SocialMedia/whatsapp.svg`} /></a>
                                         </Link>
                                     }
