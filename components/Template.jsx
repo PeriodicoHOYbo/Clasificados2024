@@ -111,7 +111,7 @@ function TemplateFour({ color, topic, grid }) {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
                                                     <div className="each-slide"  key={index} >
                                                         {
-                                                            <img className='object-cover h-full' src={i.url} />
+                                                            <img className='object-cover h-full hover:scale-125 transition-all' src={i.url} />
                                                         }
                                                      
                                                     </div>

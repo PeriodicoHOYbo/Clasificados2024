@@ -41,7 +41,7 @@ function Temporizador({topic}) {
     }
     useEffect(() => {
         if (timer) {
-            zoomIMG === undefined && userDB && userDB[topic && topic !== undefined ? topic : 'Inicio'] && userDB[topic && topic !== undefined ? topic : 'Inicio']['Modals'] && Object.values(userDB[topic && topic !== undefined ? topic : 'Inicio']['Modals']).length > 0 && setUserModalsInterval(12000)
+            zoomIMG === undefined && userDB && userDB[topic && topic !== undefined ? topic : 'Inicio'] && userDB[topic && topic !== undefined ? topic : 'Inicio']['Modals'] && Object.values(userDB[topic && topic !== undefined ? topic : 'Inicio']['Modals']).length > 0 && setUserModalsInterval(20000)
         } else if (!timer && timerId) {
             clearTimeout(timerId);
             setTimer(true)
@@ -57,6 +57,7 @@ function Temporizador({topic}) {
         {/* {bgOpacity && <div className={` ${styles.animation}`}></div>} */}
 
         {zoomIMG !== undefined && <div className={`fixed flex justify-center items-center top-0 left-0 h-[100vh] w-[100vw] z-[10000] ${styles.animation} `} onClick={closeZoom}>
+       
             <div className='inline-block relative'>
                 <span onClick={() => redirect(zoomIMG !== undefined && zoomIMG.redireccion ? zoomIMG.redireccion : (zoomIMG !== undefined && zoomIMG.enlace && zoomIMG.enlace.includes('https://www.youtube') ? zoomIMG.enlace : '#'))}>
                     {zoomIMG !== undefined && zoomIMG.url
