@@ -296,7 +296,7 @@ function TemplateOne() {
           {
             userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images !== undefined &&
             <div className='relative '>
-              <Slide transitionDuration={50} arrows={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.length > 1} duration={50} scale={1} indicators={true} easing='cubic' autoplay={false}>
+              <Slide transitionDuration={1000} infinite={false} arrows={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.length > 1} duration={50} scale={1} indicators={true} easing='cubic' autoplay={false}>
                 {
                   userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.map((i, index) =>
                     <div className="each-slide " key={index} >
