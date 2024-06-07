@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { getDate, getDayMonthYear, getMonthAndYear, formatDayMonthYear } from '../utils/Utils'
 import imageCompression from 'browser-image-compression';
 
+
 export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
     const { userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, monthAndYear, dayMonthYear } = useUser()
 
@@ -17,6 +18,7 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
     const [localFileURL, setLocalFileURL] = useState(null)
     const [isCheckedComp, setIsCheckedComp] = useState(true)
     const [isCheckedModal, setIsCheckedModal] = useState(true)
+    const [isCheckedPDF, setIsCheckedPDF] = useState(false)
 
 
     function handlerEventChange(e) {
@@ -47,7 +49,12 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
     function handlerCheckedModal() {
         setIsCheckedModal(!isCheckedModal)
     }
-
+    function handlerCheckedPDF () {
+        setIsCheckedPDF(!isCheckedPDF)
+    }
+    // function isCheckedModalPDF () {
+    //     setIsCheckedPDF()
+    // }
     function save(e) {
         e.preventDefault()
         const monthYear = monthAndYear ? monthAndYear : getMonthAndYear()
@@ -58,7 +65,7 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
         } else {
             if (data[`dateInit`] && data[`dateFinish`]) {
                 const key = newDate.getTime()
-                const object = { [key]: { uuid: key, ...data, modal: isCheckedModal } }
+                const object = { [key]: { uuid: key, ...data, modal: isCheckedModal, pdf: isCheckedPDF } }
                 writeUserData(ruteDB, object, setUserSuccess, setUserData)
                 localFile && uploadIMG(ruteDB, ruteSTG, key, localFile, setUserSuccess, monthYear, isCheckedComp)
             } else {
@@ -73,10 +80,10 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
         removeData(`${ruteDB}/${dataDB.uuid}`, setUserData, setUserSuccess)
         // close(null)
     }
+
     return (
         <>
             {userDB && dataDB && dataDB !== undefined
-            //----------------------------------------------- Editar
                 ?
                 <form className={style.formSelectAdds}>
 
@@ -99,9 +106,9 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
                     <input type="text" placeholder='Enalce redireccion' name={`${id}-redireccion`} defaultValue={data.redireccion ? data.redireccion : dataDB.redireccion} onChange={handlerEventChange} />
                     <input type="text" placeholder='Whatsapp' name={`${id}-whatsapp`} defaultValue={data.whatsapp ? data.whatsapp : dataDB.whatsapp} onChange={handlerEventChange} />
 
-                    <input className={style.calendario} type="date" id="start" name={`${id}-dateInit`}   defaultValue={formatDayMonthYear(dataDB.dateInit)} onChange={handlerEventChange} />
+                    <input className={style.calendario} type="date" id="start" name={`${id}-dateInit`}  defaultValue={formatDayMonthYear(dataDB.dateInit)}  onChange={handlerEventChange} />
                     <p className={`${style.require} ${data[`${id}-dateInit`] ? style.green : ''}`}>{data[`${id}-dateInit`] ? 'Correcto' : '*Requerido'}</p>
-
+{console.log(formatDayMonthYear(dataDB.dateFinish))}
                     <input className={style.calendario} type="date" id="start" name={`${id}-dateFinish`}  defaultValue={formatDayMonthYear(dataDB.dateFinish)} onChange={handlerEventChange} />
                     <p className={`${style.require} ${data[`${id}-dateFinish`] ? style.green : ''}`}>{data[`${id}-dateFinish`] ? 'Correcto' : '*Requerido'}</p>
 
@@ -111,7 +118,6 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
 
                 </form>
                 :
-                // ------------------------------------------- Register
                 <form className={style.formSelectAdds}>
 
                     <label for={`for${id}`} className={style.label} >{title}</label>
@@ -119,8 +125,9 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
                     <img className={style.previewIMGBanner} src={(localFileURL && localFileURL) || (data[`enlace`] !== undefined && data[`enlace`].length > 10 ? data[`enlace`] : null)} onClick={ressetInputFile} alt="" />
 
                     <div className={style.radioInputs}>
-                        <input type="checkbox" onClick={handlerCheckedComp} checked={isCheckedComp} /> Comprimir
-                        <input type="checkbox" onClick={handlerCheckedModal} checked={isCheckedModal} /> Modal (*PDF)
+                        <input type="checkbox" onClick={handlerCheckedComp} checked={isCheckedComp} /> Comp
+                        <input type="checkbox" onClick={handlerCheckedModal} checked={isCheckedModal} /> Modal
+                        <input type="checkbox" onClick={handlerCheckedPDF} checked={isCheckedPDF} /> PDF
                     </div>
 
                     <input type="text" placeholder='Enlace Youtube o IMG' name={`${id}-enlace`} onChange={handlerEventChange} />

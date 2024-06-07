@@ -51,7 +51,7 @@ function Admin() {
     const res = await fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=8&playlistId=UULFXFA6pzESb1NQMsepmhC6Vw&key=${YOUTUBE_API_KEY}`)
     const data = await res.json();
     setListYT(data)
-  }
+  }      
 
   function redirectYT() {
     window.open('https://www.youtube.com/@periodicohoybolivia2201/videos', '_blank')
