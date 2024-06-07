@@ -294,7 +294,7 @@ function TemplateOne() {
           }
 
           {
-            userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images !== undefined &&
+            userDB[validate()] && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images !== undefined &&
             <div className='relative '>
               <Slide transitionDuration={1000} infinite={false} arrows={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].images.length > 1} duration={50} scale={1} indicators={true} easing='cubic' autoplay={false}>
                 {

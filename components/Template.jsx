@@ -48,7 +48,7 @@ function TemplateFour({ color, topic, grid }) {
     }, [userDB]);
     return (
 
-        <section className={`${styles.section}`} id={topic} style={{ backgroundColor: 'white',  }}>
+        <section className={`${styles.section}`} id={topic} style={{ backgroundColor: 'white', }}>
             {topic != "Inicio" && <div className={styles.containerSubtitle}><h4 className={styles.subtitle}>{topic == 'Invitaciones' ? 'Invitaciones' : topic.toUpperCase()}</h4></div>}
 
             {userDB[topic]["BannerTop"] && <Banner ruta={topic} carpeta="BannerTop" click={handlerClickEnlace}></Banner>}
@@ -57,7 +57,7 @@ function TemplateFour({ color, topic, grid }) {
 
 
             <div
-            className={` w-full relative md:p-5 columns-2 sm:columns-3 p-2 ${styles.cssStyle}` }
+                className={` w-full relative md:p-5 columns-2 sm:columns-3 p-2 ${styles.cssStyle}`}
             //  className={`
             //     ${grid === 'TemplateOne' && styles.gridOne}
             //     ${grid === 'TemplateThreeA' && styles.gridThreeA}
@@ -77,9 +77,9 @@ function TemplateFour({ color, topic, grid }) {
                             <div className='relative shadow-[#0000006e] shadow-xl  rounded-[5px] mb-3  md:mb-5' key={index} >
                                 {router.pathname == "/Admin" && <span className={styles.datePost} onClick={() => router.pathname == "/Admin" && handlerClickEnlace({ i, carpeta: 'Post' })}>{`${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getDate()}-${months[new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMonth()]} ${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getHours()}:${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMinutes()}`}</span>}
 
-                                <Link href={ userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion']  : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''} legacyBehavior>
+                                <Link href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''} legacyBehavior>
                                     <a target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
-                                    {console.log(userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'])}
+                                        {console.log(userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'])}
                                         {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
                                             {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
@@ -102,18 +102,26 @@ function TemplateFour({ color, topic, grid }) {
                             userDB[topic]["Posts"] && userDB[topic]["Posts"][`PostImage_${i}`] && router.pathname == "/Admin" &&
                             <div className='relative shadow-[#0000006e] shadow-xl  rounded-[5px] m-5 md:m-0  md:mb-5' key={index}>
                                 {<span className={styles.datePost} onClick={() => router.pathname == "/Admin" && handlerClickEnlace({ i, carpeta: 'Post' })}>{`${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getDate()}-${months[new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMonth()]} ${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getHours()}:${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMinutes()}`}</span>}
-                                <Link  href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] :userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} legacyBehavior>
-                                    <a  target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
+                                <Link href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} legacyBehavior>
+                                    <a target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
+
+
+
+
+                                        {/* {
+                                          userDB[topic].Posts[`PostImage_${i}`].images !== undefined &&   userDB[topic].Posts[`PostImage_${i}`].images[1]
+                                        } */}
+
+
 
 
                                         {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
                                             {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
-                                                    <div className="each-slide"  key={index} >
+                                                    <div className="each-slide" key={index} >
                                                         {
                                                             <img className='object-cover h-full hover:scale-125 transition-all' src={i.url} />
                                                         }
-                                                     
                                                     </div>
                                                 )}
                                         </Slide>}
@@ -127,16 +135,16 @@ function TemplateFour({ color, topic, grid }) {
 
             </div>
             <div className='md:hidden'>
-                    {topic === 'Necrologicos' && <BannerLateral carpeta="BannerIzquierdo" items={[1]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'CompraVenta' && <BannerLateral carpeta="BannerDerecho" items={[2]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'ExtraviosHallazgos' && <BannerLateral carpeta="BannerIzquierdo" items={[2]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'EmpleosServicios' && <BannerLateral carpeta="BannerDerecho" items={[3]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'TurismoHoteleria' && <BannerLateral carpeta="BannerIzquierdo" items={[3]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'ArtesaniaFolklore' && <BannerLateral carpeta="BannerDerecho" items={[4]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'Eventos' && <BannerLateral carpeta="BannerIzquierdo" items={[4]} click={handlerClickEnlace}></BannerLateral>}
-                    {topic === 'Varios' && <BannerLateral carpeta="BannerDerecho" items={[1]} click={handlerClickEnlace}></BannerLateral>}
-                </div>
-  
+                {topic === 'Necrologicos' && <BannerLateral carpeta="BannerIzquierdo" items={[1]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'CompraVenta' && <BannerLateral carpeta="BannerDerecho" items={[2]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'ExtraviosHallazgos' && <BannerLateral carpeta="BannerIzquierdo" items={[2]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'EmpleosServicios' && <BannerLateral carpeta="BannerDerecho" items={[3]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'TurismoHoteleria' && <BannerLateral carpeta="BannerIzquierdo" items={[3]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'ArtesaniaFolklore' && <BannerLateral carpeta="BannerDerecho" items={[4]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'Eventos' && <BannerLateral carpeta="BannerIzquierdo" items={[4]} click={handlerClickEnlace}></BannerLateral>}
+                {topic === 'Varios' && <BannerLateral carpeta="BannerDerecho" items={[1]} click={handlerClickEnlace}></BannerLateral>}
+            </div>
+
 
             {userDB[topic]["BannerBottom"] && <Banner ruta={topic} carpeta="BannerBottom" click={handlerClickEnlace} ></Banner>}
             {dataEditor && <Modal topic={topic} carpeta={dataEditor.carpeta} i={dataEditor.i} close={handlerClickEnlace} ></Modal>}
