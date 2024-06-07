@@ -6,6 +6,7 @@ import { getIndexStorage } from '../firebase/storage'
 import styles from '../styles/Template.module.css'
 import { useRouter } from 'next/router'
 import { Slide } from 'react-slideshow-image'
+import BannerLateral from './BannerLateral'
 
 import Link from 'next/link'
 
@@ -41,7 +42,7 @@ function TemplateFour({ color, topic, grid }) {
         prevArrow: <button style={{ ...buttonStyle }}></button>,
         nextArrow: <button style={{ ...buttonStyle }}></button>
     }
-    // console.log(userDB)
+    console.log(userDB)
     useEffect(() => {
         userDB[topic] && userDB[topic]["Posts"] && setDataForDate(Object.keys(userDB[topic]["Posts"]).map(i => { const newI = i.split('_'); return newI[1] }).sort((a, b) => b - a))
     }, [userDB]);
@@ -76,9 +77,9 @@ function TemplateFour({ color, topic, grid }) {
                             <div className='relative shadow-[#0000006e] shadow-xl  rounded-[5px] mb-3  md:mb-5' key={index} >
                                 {router.pathname == "/Admin" && <span className={styles.datePost} onClick={() => router.pathname == "/Admin" && handlerClickEnlace({ i, carpeta: 'Post' })}>{`${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getDate()}-${months[new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMonth()]} ${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getHours()}:${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMinutes()}`}</span>}
 
-                                <Link href={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] ? userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] : ''} legacyBehavior>
+                                <Link href={ userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion']  : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''} legacyBehavior>
                                     <a target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
-
+                                    {console.log(userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'])}
                                         {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
                                             {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
@@ -101,7 +102,7 @@ function TemplateFour({ color, topic, grid }) {
                             userDB[topic]["Posts"] && userDB[topic]["Posts"][`PostImage_${i}`] && router.pathname == "/Admin" &&
                             <div className='relative shadow-[#0000006e] shadow-xl  rounded-[5px] m-5 md:m-0  md:mb-5' key={index}>
                                 {<span className={styles.datePost} onClick={() => router.pathname == "/Admin" && handlerClickEnlace({ i, carpeta: 'Post' })}>{`${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getDate()}-${months[new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMonth()]} ${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getHours()}:${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMinutes()}`}</span>}
-                                <Link  href={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] ? userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] : ''} legacyBehavior>
+                                <Link  href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] :userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} legacyBehavior>
                                     <a  target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
 
 
@@ -125,6 +126,17 @@ function TemplateFour({ color, topic, grid }) {
                 )}
 
             </div>
+            <div className='md:hidden'>
+                    {topic === 'Necrologicos' && <BannerLateral carpeta="BannerIzquierdo" items={[1]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'CompraVenta' && <BannerLateral carpeta="BannerDerecho" items={[2]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'ExtraviosHallazgos' && <BannerLateral carpeta="BannerIzquierdo" items={[2]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'EmpleosServicios' && <BannerLateral carpeta="BannerDerecho" items={[3]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'TurismoHoteleria' && <BannerLateral carpeta="BannerIzquierdo" items={[3]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'ArtesaniaFolklore' && <BannerLateral carpeta="BannerDerecho" items={[4]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'Eventos' && <BannerLateral carpeta="BannerIzquierdo" items={[4]} click={handlerClickEnlace}></BannerLateral>}
+                    {topic === 'Varios' && <BannerLateral carpeta="BannerDerecho" items={[1]} click={handlerClickEnlace}></BannerLateral>}
+                </div>
+  
 
             {userDB[topic]["BannerBottom"] && <Banner ruta={topic} carpeta="BannerBottom" click={handlerClickEnlace} ></Banner>}
             {dataEditor && <Modal topic={topic} carpeta={dataEditor.carpeta} i={dataEditor.i} close={handlerClickEnlace} ></Modal>}

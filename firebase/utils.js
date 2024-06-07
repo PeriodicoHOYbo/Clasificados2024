@@ -159,11 +159,12 @@ async function getIndexData(setUserData, date, minDate, setUserSuccess) {
   arr.map((i) => {
     // get(query(ref(db, `${i}/Posts`), limitToLast(10), orderByChild('fecha'), ))
 
-    console.log(parseInt(date))
     // get(query(ref(db, `${i}/Posts`), limitToLast(10), orderByChild('fecha'), startAt(minDate), endAt(date)))
 
+    // get(query(ref(db, `${i}/Posts`), limitToLast(12), orderByChild('dateFinish'), startAt(minDate ? minDate : nowaday)))
     get(query(ref(db, `${i}/Posts`), limitToLast(12), orderByChild('dateFinish'), startAt(minDate ? minDate : nowaday)))
       .then(async (snapshot) => {
+        console.log(snapshot.val())
 
         if (snapshot.exists()) {
           let snap = snapshot.val()

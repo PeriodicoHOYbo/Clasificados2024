@@ -81,33 +81,33 @@ export default function Form({ topic, value, color }) {
     e.preventDefault()
 
     switch (topic) {
-      case sectionsDB[0].title:
+      case sectionsDB[0].hash:
         return save(11)
         break;
-      case sectionsDB[1].title:
+      case sectionsDB[1].hash:
         return save(12)
         break;
-      case sectionsDB[2].title:
+      case sectionsDB[2].hash:
         return save(13)
         break;
-      case sectionsDB[3].title:
+      case sectionsDB[3].hash:
         return save(14)
         break;
-      case sectionsDB[4].title:
+      case sectionsDB[4].hash:
         return save(15)
         break;
-      case sectionsDB[5].title:
+      case sectionsDB[5].hash:
         return save(16)
-      case sectionsDB[6].title:
+      case sectionsDB[6].hash:
         return save(17)
         break;
-      case sectionsDB[7].title:
+      case sectionsDB[7].hash:
         return save(18)
         break;
-      case sectionsDB[8].title:
+      case sectionsDB[8].hash:
         return save(19)
         break;
-      case sectionsDB[9].title:
+      case sectionsDB[9].hash:
         return save(20)
         break;
       default:
@@ -242,7 +242,7 @@ export default function Form({ topic, value, color }) {
               <input type="text" className='w-full border-b-[1px] border-gray-500 rounded-[5px] mr-2 text-[12px] px-5' placeholder='Urls' name="images" />
               <button className='block w-[50px] relative cursor-pointer  rounded-bl-[5px] rounded-tr-[5px] transition-all p-[2px] text-[white] text-[12px] bg-[brown] border-[2px] border-[brown]'>add</button>
             </form>
-            <form className={`w-full bg-white rounded-[20px] p-5 space-y-5 ${style.formSelectPost}`} onSubmit={formSubmit}>
+            <form className={`w-full bg-white rounded-[20px] p-5 space-y-3 ${style.formSelectPost}`} onSubmit={formSubmit}>
               <label htmlFor={`${topic}-Post`} className='block relative cursor-pointer min-w-[140px] rounded-[20px] transition-all w-full p-[2px] text-[white] text-[12px] bg-[brown] border-[2px] border-[brown]' >Añadir publicación </label>
               {/* <div className={style.counterBox}>
                 <div>
@@ -255,14 +255,7 @@ export default function Form({ topic, value, color }) {
               <input type="text" className='w-full border-b-[1px] border-gray-500' placeholder='Titular' name="descriptionPost" onChange={handlerEventChange} maxLength={isCheckedLength ? 65 : ''} />
               {/* <input type="text" className='w-full border-b-[1px] border-gray-500' placeholder='Enlace' name="enlacePost" onChange={handlerEventChange} /> */}
               <input type="text" className='w-full border-b-[1px] border-gray-500' placeholder='WhatsApp' name="whatsapp" onChange={handlerEventChange} />
-
-
-
-
-
-
-
-
+              <input type="text" className='w-full border-b-[1px] border-gray-500' placeholder='URL de redireccion' name="redireccion" onChange={handlerEventChange} />
               <input  className='w-full border-b-[1px] border-gray-500' type="date" id="start" name={`dateInit`} onChange={handlerEventChange3} />
               <p className={`text-[12px] ${data[`dateInit`] ? style.green : 'text-[brown]'}`}>{data[`dateInit`] ? 'Correcto' : '*Requerido'}</p>
 
