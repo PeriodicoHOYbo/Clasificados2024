@@ -80,7 +80,12 @@ function TemplateFour({ color, topic, grid }) {
                                 <Link href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''} legacyBehavior>
                                     <a target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
                                         {console.log(userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'])}
-                                        {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
+                                       
+                                       
+                                        {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && userDB[topic].Posts[`PostImage_${i}`].images && <img className='object-cover h-full  hover:scale-125 transition-all' src={userDB[topic].Posts[`PostImage_${i}`].images[0].url}/>}
+                                       
+                                       
+                                        {/* {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
                                             {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
                                                     <div className="each-slide" key={index} >
@@ -91,7 +96,7 @@ function TemplateFour({ color, topic, grid }) {
                                                         }
                                                     </div>
                                                 )}
-                                        </Slide>}
+                                        </Slide>} */}
                                     </a>
                                 </Link>
 
@@ -104,18 +109,10 @@ function TemplateFour({ color, topic, grid }) {
                                 {<span className={styles.datePost} onClick={() => router.pathname == "/Admin" && handlerClickEnlace({ i, carpeta: 'Post' })}>{`${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getDate()}-${months[new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMonth()]} ${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getHours()}:${new Date(userDB[topic].Posts[`PostImage_${i}`].fecha).getMinutes()}`}</span>}
                                 <Link href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} legacyBehavior>
                                     <a target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
-
-
-
-
-                                        {/* {
-                                          userDB[topic].Posts[`PostImage_${i}`].images !== undefined &&   userDB[topic].Posts[`PostImage_${i}`].images[1]
-                                        } */}
-
-
-
-
-                                        {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
+                                        {
+                                          userDB[topic].Posts[`PostImage_${i}`].images !== undefined &&   userDB[topic].Posts[`PostImage_${i}`].images[0] &&  <img className='object-cover h-full hover:scale-125 transition-all' src={userDB[topic].Posts[`PostImage_${i}`].images[0].url} />
+                                        }
+                                        {/* {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
                                             {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
                                                     <div className="each-slide" key={index} >
@@ -124,7 +121,7 @@ function TemplateFour({ color, topic, grid }) {
                                                         }
                                                     </div>
                                                 )}
-                                        </Slide>}
+                                        </Slide>} */}
                                     </a>
                                 </Link>
                                 {userDB[topic]["Posts"][`PostImage_${i}`]['description'] && <p className={styles.description}>{userDB[topic]["Posts"][`PostImage_${i}`]['description']}</p>}
