@@ -60,7 +60,7 @@ export default function Navbar({ footer }) {
             <nav className={`${style.nav}  md:px-[130px]`} style={{ position: 'relative' }}>
 
             <Link href="https://hoy.bo/" className='' legacyBehavior scroll={false}>
-                    <a className={` hidden md:inline-block absolute pt-[15px] h-[100px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                    <a className={` hidden md:inline-block absolute pt-[15px] lg:pt-1 h-[100px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
                         <span className=' h-[40px] rounded-full flex justify-center items-center bg-white rounded'><img src={'/inicio_v2.jpeg'} className="block h-[40px] rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
                     </a>
                 </Link>
@@ -70,7 +70,7 @@ export default function Navbar({ footer }) {
                     </Link>)
                 }
                 <Link href="/" legacyBehavior scroll={false}>
-                    <a className={`hidden md:inline-block absolute pt-[15px] top-0 bottom-0 my-auto  right-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                    <a className={`hidden md:inline-block absolute pt-[15px] lg:pt-1 top-0 bottom-0 my-auto  right-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
                         <span className='  h-[40px] rounded-full flex justify-center items-center bg-white rounded my-auto '><img src={'/clasificados_v2.jpeg'} className="block h-[40px] rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
                     </a>
                 </Link>

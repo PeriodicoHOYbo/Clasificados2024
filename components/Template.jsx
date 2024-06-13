@@ -79,12 +79,8 @@ function TemplateFour({ color, topic, grid }) {
 
                                 <Link href={userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] && userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] ? userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'] : userDB[topic]["Posts"][`PostImage_${i}`]['enlace']} target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''} legacyBehavior>
                                     <a target={userDB[topic]["Posts"][`PostImage_${i}`]['enlace'] && userDB[topic]["Posts"][`PostImage_${i}`]['enlace'].includes('http') ? '_blanck' : ''}>
-                                        {console.log(userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'])}
-                                       
-                                       
+                                        {console.log(userDB[topic]["Posts"][`PostImage_${i}`]['redireccion'])}  
                                         {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && userDB[topic].Posts[`PostImage_${i}`].images && <img className='object-cover h-full  hover:scale-125 transition-all' src={userDB[topic].Posts[`PostImage_${i}`].images[0].url}/>}
-                                       
-                                       
                                         {/* {userDB[topic].Posts[`PostImage_${i}`].images !== undefined && <Slide transitionDuration={8000} duration={10} scale={1}{...properties} indicators={false} easing='cubic' autoplay={false}>
                                             {
                                                 userDB[topic].Posts[`PostImage_${i}`].images.map((i, index) =>
