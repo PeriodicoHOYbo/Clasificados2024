@@ -307,7 +307,7 @@ function TemplateOne() {
                   )}
               </Slide>
               {
-                userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} className='z-50' legacyBehavior>
+                userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp !== '' && <Link href={`https://api.whatsapp.com/send?phone=${userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} className='z-50' legacyBehavior>
                   <a className='fixed bottom-[30px] right-[30px] text-white font-semibold bg-[#00000093] inline-block px-5 py-1 border-white border-[1px] rounded-full' target="_blank"> Contactar <img className='ml-5 h-[20px] w-[20px] pb-1' src={`/SocialMedia/whatsapp.svg`} /></a>
                 </Link>
               }
