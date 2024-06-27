@@ -114,33 +114,33 @@ function TemplateOne() {
 
     switch (router.query.temporal.slice(0, 2)) {
       case '11':
-        return sectionsDB[0].title
+        return sectionsDB[0].hash
         break;
       case '12':
-        return sectionsDB[1].title
+        return sectionsDB[1].hash
         break;
       case '13':
-        return sectionsDB[2].title
+        return sectionsDB[2].hash
         break;
       case '14':
-        return sectionsDB[3].title
+        return sectionsDB[3].hash
         break;
       case '15':
-        return sectionsDB[4].title
+        return sectionsDB[4].hash
         break;
       case '16':
-        return sectionsDB[5].title
+        return sectionsDB[5].hash
       case '17':
-        return sectionsDB[6].title
+        return sectionsDB[6].hash
         break;
       case '18':
-        return sectionsDB[7].title
+        return sectionsDB[7].hash
         break;
       case '19':
-        return sectionsDB[8].title
+        return sectionsDB[8].hash
         break;
       case '20':
-        return sectionsDB[9].title
+        return sectionsDB[9].hash
         break;
       default:
         return setUserSuccess(false)
